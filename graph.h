@@ -6,10 +6,13 @@
 #include <string>
 #include <stdexcept>
 
-struct Vertex {
-	int index;
-	int index_of_owner;
+class Vertex {
+public:
+	std::string name_of_owner;
 	int weight;
+	friend class Graph;
+private:
+	int index;
 };
 
 class Graph {

@@ -10,6 +10,8 @@ bool Graph::is_in_indeces(std::string s) {
 }
 
 int Graph::find_in_graph(int from, int to) {
+	if(from>graph.size())
+		return -1;
 	for(int i=0; i<graph[from].size(); i++) {
 		if(graph[from][i].index == to)
 			return i;
@@ -34,10 +36,11 @@ Vertex& Graph::operator() (std::string  from, std::string to) {
 Vertex& Graph::operator() (int from, int to) {
 	int index = find_in_graph(from, to);
 	if(index<0) {
-		throw;
+		index = graph[from].size()+1;
 	}
-	Vertex& number = graph[from][index];
-	return number;
+	Vertex& vertex = graph[from][index];
+	vertex.index = to;
+	return vertex;
 }
 
 Vertex Graph::at(std::string from, std::string to) {
