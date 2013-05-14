@@ -13,7 +13,7 @@ struct Vertex {
 
 class Graph {
 public:
-	int& operator[] (std::string from, std::string to);
+	int& operator() (std::string from, std::string to);
 private:
 	std::vector<std::forward_list<Vertex>> graph;
 	std::map<std::string, int> indeces;
