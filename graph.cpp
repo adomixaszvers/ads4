@@ -1,5 +1,11 @@
 #include "graph.h"
 
+Vertex& Vertex::operator= (const Vertex& v) {
+	name_of_owner = v.name_of_owner;
+	weight = v.weight;
+	return *this;
+}
+
 bool Graph::is_in_indeces(std::string s) {
 	try {
 		indeces.at(s);

@@ -10,6 +10,7 @@ class Vertex {
 public:
 	std::string name_of_owner;
 	int weight;
+	Vertex& operator= (const Vertex& v);
 	friend class Graph;
 private:
 	int index;
@@ -23,7 +24,7 @@ public:
 private:
 	Vertex& operator() (int from, int to);
 	Vertex at(int from, int to);
-	std::vector<std::vector<Vertex> > graph;
+	std::map<int, std::map<int, Vertex> > graph;
 	std::map<std::string, int> indeces;
 	void create_uniq(std::string s);
 	bool is_in_indeces(std::string s);
