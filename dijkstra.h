@@ -26,15 +26,14 @@ private:
 	std::map<std::string, std::string> map;
 };
 
-std::map<int, std::map<std::string, std::string> > previous;
-
 void DijkstraComputePaths(std::string from,
                           Graph &graph,
                           distance_map &min_distance,
-			  int number_of_paths);
+			  std::map<int, previous_map> &previous,
+			  int &number_of_paths);
  
  
 std::list<std::string> DijkstraGetShortestPathTo(
-    std::string to, std::map<std::string, std::string> &p);
+    std::string to, previous_map &p);
 
 #endif
