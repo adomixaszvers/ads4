@@ -25,9 +25,10 @@ int main() {
     int n;
     std::string from, to;
     std::string f, t, owner;
+    int number_of_paths;
     double weight;
     distance_map min_distance;
-    previous_map previous;
+    std::map<int, std::map<std::string, std::string> > previous;
 
     std::ifstream df(DFPav);
 
@@ -55,13 +56,15 @@ int main() {
     }
 
 
-    DijkstraComputePaths(from, graph, min_distance, previous);
+    DijkstraComputePaths(from, graph, min_distance, previous, number_of_paths);
 
     std::cout << "Kaina " << min_distance.at(to) << std::endl;
-    std::list<std::string> path = DijkstraGetShortestPathTo(to, previous);
-    std::cout << "Kelias : ";
-    std::copy(path.begin(), path.end(), std::ostream_iterator<std::string>(std::cout, " "));
-    std::cout << std::endl;
+    for(int i=0; i<number_of_paths; i++) {
+    	std::list<std::string> path = DijkstraGetShortestPathTo(to, previous[i]);
+    	std::cout << "Kelias : ";
+    	std::copy(path.begin(), path.end(), std::ostream_iterator<std::string>(std::cout, " "));
+    	std::cout << std::endl;
+    }
 
     return 0;
 }
