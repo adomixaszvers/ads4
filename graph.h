@@ -5,13 +5,19 @@
 #include <map>
 #include <string>
 #include <stdexcept>
+#include <limits>
+
+const double Infinity = std::numeric_limits<double>::infinity();
+
+const std::string UNDEFINED ("UNDEFINED");
 
 struct Vertex {
-	Vertex(std::string n, int w);
+	Vertex(std::string n, double w);
 	Vertex();
 	std::string name_of_owner;
-	int weight;
+	double weight;
 	Vertex& operator= (const Vertex& v);
+	void operator() (std::string n, double w);
 };
 
 class Graph {
