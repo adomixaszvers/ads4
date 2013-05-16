@@ -31,7 +31,6 @@ std::string previous_map::at(const std::string index) {
 void DijkstraComputePaths(std::string source,
                           Graph &graph,
                           distance_map &min_distance,
-                          std::map<int, std::map<std::string, std::string> > &previous,
                           int& number_of_paths)
 {
     min_distance[source] = 0;
@@ -74,10 +73,10 @@ void DijkstraComputePaths(std::string source,
 
 
 std::list<std::string> DijkstraGetShortestPathTo(
-    std::string vertex, std::map<std::string, std::string> &previous)
+    std::string vertex, std::map<std::string, std::string> &p)
 {
     std::list<std::string> path;
-    for ( ; previous.find(vertex) != previous.end(); vertex = previous.at(vertex))
+    for ( ; p.find(vertex) != p.end(); vertex = p.at(vertex))
         path.push_front(vertex);
     return path;
 }

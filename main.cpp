@@ -28,7 +28,6 @@ int main() {
     int number_of_paths;
     double weight;
     distance_map min_distance;
-    std::map<int, std::map<std::string, std::string> > previous;
 
     std::ifstream df(DFPav);
 
@@ -56,7 +55,7 @@ int main() {
     }
 
 
-    DijkstraComputePaths(from, graph, min_distance, previous, number_of_paths);
+    DijkstraComputePaths(from, graph, min_distance, number_of_paths);
 
     std::cout << "Kaina " << min_distance.at(to) << std::endl;
     for(int i=0; i<number_of_paths; i++) {
