@@ -31,13 +31,11 @@ std::string previous_map::at(const std::string index) {
 void DijkstraComputePaths(std::string source,
                           Graph &graph,
                           distance_map &min_distance,
-                          std::map<int, std::map<std::string, std::string> > &previous,
-                          int& number_of_paths)
+			 previous_map &previous)
 {
     min_distance[source] = 0;
     std::set<std::pair<double, std::string> > vertex_queue;
     vertex_queue.insert(std::make_pair(min_distance.at(source), source));
-    number_of_paths = 0;
 
     while (!vertex_queue.empty())
     {
@@ -60,13 +58,9 @@ void DijkstraComputePaths(std::string source,
                 vertex_queue.erase(std::make_pair(min_distance.at(v), v));
 
                 min_distance[v] = distance_through_u;
-                number_of_paths=1;
-		previous.clear();
-                previous[number_of_paths][v] = u;
+                previous[v] = u;
                 vertex_queue.insert(std::make_pair(min_distance.at(v), v));
 
-            } else if(distance_through_u == min_distance.at(v)) {
-            	previous[++number_of_paths][v] = u;
             }
         }
     }
@@ -74,10 +68,10 @@ void DijkstraComputePaths(std::string source,
 
 
 std::list<std::string> DijkstraGetShortestPathTo(
-    std::string vertex, std::map<std::string, std::string> &previous)
+    std::string vertex, previous_map &previous)
 {
     std::list<std::string> path;
-    for ( ; previous.find(vertex) != previous.end(); vertex = previous.at(vertex))
+    for ( ; vertex != UNDEFINED; vertex = previous.at(vertex))
         path.push_front(vertex);
     return path;
 }
