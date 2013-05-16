@@ -1,5 +1,8 @@
 #include "graph.h"
 
+Vertex::Vertex(std::string n, int w): name_of_owner(n), weight(w) {}
+Vertex::Vertex(): name_of_owner("unknown"), weight(0) {}
+
 Vertex& Vertex::operator= (const Vertex& v) {
 	name_of_owner = v.name_of_owner;
 	weight = v.weight;
@@ -27,7 +30,7 @@ int Graph::find_in_graph(int from, int to) {
 
 void Graph::create_uniq(std::string s) {
 	if(!is_in_indeces(s)) {
-		indeces[s] = indeces.size()+1;
+		indeces[s] = indeces.size();
 	}
 }
 
@@ -59,4 +62,11 @@ Vertex Graph::at(int from, int to) {
 		throw;
 	}
 	return graph.at(from).at(index);
+}
+
+std::vector<std::string> Graph::get_keys() {
+	std::vector<std::string> keys;
+	for(std::map<std::string, int>::iterator it=indeces.begin(); it!= indeces.end(); ++it)
+		keys.push_back(it->first);
+	return keys;
 }

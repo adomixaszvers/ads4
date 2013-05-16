@@ -8,6 +8,8 @@
 
 class Vertex {
 public:
+	Vertex(std::string n, int w);
+	Vertex();
 	std::string name_of_owner;
 	int weight;
 	Vertex& operator= (const Vertex& v);
@@ -20,6 +22,7 @@ class Graph {
 public:
 	Vertex& operator() (std::string from, std::string to);
 	Vertex at(std::string from, std::string to);
+	std::vector<std::string> get_keys();
 
 private:
 	Vertex& operator() (int from, int to);
